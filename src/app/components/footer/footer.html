@@ -1,0 +1,146 @@
+<section id="contacto" class="contact">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-5 text-white">
+        <span class="eyebrow">Solicita información</span>
+        <h2 class="section-title">Desarrolla tu potencial internacional</h2>
+        <p class="opacity-75">
+          Te ofrecemos diferentes programas, horarios y modalidades que se adaptan a tu estilo de vida.
+          Déjanos tus datos y pronto nos contactaremos contigo.
+        </p>
+        <a class="btn-accent mt-2" href="http://retos.ucontinental.edu.pe/ingles-profesional/formulario" target="_blank" rel="noopener">
+          <i class="bi bi-lightning-charge-fill"></i> Pon a prueba tu nivel de inglés
+        </a>
+      </div>
+
+      <div class="col-lg-7">
+        <div class="form-card">
+          @if (enviado) {
+            <div class="ok fade-in">
+              <i class="bi bi-check-circle-fill"></i>
+              <h3>¡Gracias por escribirnos!</h3>
+              <p>Un asesor del Centro de Idiomas se pondrá en contacto contigo muy pronto.</p>
+              <button type="button" class="btn-ghost" (click)="nuevo()">Enviar otra consulta</button>
+            </div>
+          } @else {
+            <form #f="ngForm" (ngSubmit)="enviar(f)" novalidate>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="c-nombre">Nombre completo</label>
+                  <input id="c-nombre" name="nombre" class="form-control" [(ngModel)]="datos.nombre" required minlength="3" #nombre="ngModel" [class.is-invalid]="nombre.invalid && nombre.touched" />
+                </div>
+                <div class="col-md-6">
+                  <label for="c-correo">Correo electrónico</label>
+                  <input id="c-correo" name="correo" type="email" class="form-control" [(ngModel)]="datos.correo" required email #correo="ngModel" [class.is-invalid]="correo.invalid && correo.touched" placeholder="correo@ejemplo.com" />
+                </div>
+                <div class="col-md-6">
+                  <label for="c-tel">Teléfono</label>
+                  <input id="c-tel" name="telefono" type="tel" class="form-control" [(ngModel)]="datos.telefono" required pattern="[0-9]{9}" #tel="ngModel" [class.is-invalid]="tel.invalid && tel.touched" placeholder="9 dígitos" />
+                </div>
+                <div class="col-md-6">
+                  <label for="c-idioma">Idioma de interés</label>
+                  <select id="c-idioma" name="idioma" class="form-select" [(ngModel)]="datos.idioma" required #idi="ngModel" [class.is-invalid]="idi.invalid && idi.touched">
+                    <option value="" disabled>Selecciona</option>
+                    @for (i of idiomas; track i) { <option [value]="i">{{ i }}</option> }
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label for="c-msg">Mensaje (opcional)</label>
+                  <textarea id="c-msg" name="mensaje" rows="3" class="form-control" [(ngModel)]="datos.mensaje"></textarea>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn-brand w-100 justify-content-center">Quiero solicitar información <i class="bi bi-send"></i></button>
+                </div>
+              </div>
+            </form>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sedes" class="section">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Nuestras sedes</span>
+      <h2 class="section-title">Estudia en la sede que mejor se adapta a ti</h2>
+    </div>
+
+    <div class="pill-tabs justify-content-center mb-4">
+      @for (s of sedes; track s.ciudad; let i = $index) {
+        <button type="button" class="pill-tab" [class.active]="activa === i" (click)="seleccionarSede(i)">{{ s.ciudad }}</button>
+      }
+    </div>
+
+    <div class="sede fade-in">
+      <div class="icon-circle"><i class="bi bi-geo-alt-fill"></i></div>
+      <h3>Sede {{ sedes[activa].ciudad }}</h3>
+      <p class="dir">{{ sedes[activa].direccion }}</p>
+      @if (sedes[activa].informes) {
+        <p class="inf">{{ sedes[activa].informes }}</p>
+      }
+      <div class="d-flex flex-wrap justify-content-center gap-3 mt-3">
+        <a class="btn-brand" [href]="mapa(sedes[activa].direccion)" target="_blank" rel="noopener">
+          <i class="bi bi-map"></i> ¿Cómo llegar?
+        </a>
+        <a class="btn-ghost" href="#contacto">Solicitar información</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <div class="brand">
+          <span class="brand-mark">CIC</span>
+          <span><strong>Centro de Idiomas</strong><small>Universidad Continental</small></span>
+        </div>
+        <p class="about">
+          Somos parte de Global Partners in Education y estamos conectados con alumnos de más de
+          50 universidades en 22 países del mundo.
+        </p>
+        <div class="social">
+          <a href="https://www.facebook.com/IdiomasContinental/" target="_blank" rel="noopener" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="https://www.instagram.com/ucontinental/" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        </div>
+      </div>
+
+      <div class="col-6 col-lg-2">
+        <h4>Programas</h4>
+        <ul>
+          @for (p of programas; track p.label) {
+            <li><a [href]="p.href" target="_blank" rel="noopener">{{ p.label }}</a></li>
+          }
+        </ul>
+      </div>
+
+      <div class="col-6 col-lg-2">
+        <h4>Información para</h4>
+        <ul>
+          @for (p of informacion; track p.label) {
+            <li><a [href]="p.href" target="_blank" rel="noopener">{{ p.label }}</a></li>
+          }
+        </ul>
+      </div>
+
+      <div class="col-lg-4">
+        <h4>Sedes</h4>
+        <ul class="sedes-list">
+          @for (s of sedes; track s.ciudad) {
+            <li><i class="bi bi-geo-alt me-2"></i>{{ s.ciudad }}</li>
+          }
+        </ul>
+        <a class="libro" href="https://librodereclamaciones.continental.edu.pe/" target="_blank" rel="noopener">
+          <i class="bi bi-journal-text me-2"></i>Libro de reclamaciones
+        </a>
+      </div>
+    </div>
+
+    <div class="copy">© {{ anio }} Centro de Idiomas · Universidad Continental. Todos los derechos reservados.</div>
+  </div>
+</footer>
+
+<a class="float-cta" href="#contacto"><i class="bi bi-chat-dots-fill"></i><span>Solicita información</span></a>

@@ -1,0 +1,16 @@
+.docente { text-align: center; }
+.avatar {
+  width: 84px; height: 84px;
+  margin: 0 auto 16px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--cic-primary), var(--cic-primary-dark));
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 700;
+  box-shadow: 0 0 0 6px var(--cic-primary-light);
+}
+.docente h3 { font-size: 1.05rem; font-weight: 700; }
+.esp { color: var(--cic-muted); font-size: 0.86rem; min-height: 44px; }
+.idiomas { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px; margin: 10px 0 12px; }
+.docente small { color: var(--cic-primary); font-weight: 600; }

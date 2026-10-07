@@ -1,0 +1,41 @@
+<section id="oferta-academica" class="section section-soft">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Oferta académica</span>
+      <h2 class="section-title">Vive sin límites</h2>
+      <p class="section-sub">Elige uno de los 3 idiomas que te ofrecemos y prepárate para alcanzar tus metas.</p>
+    </div>
+
+    <div class="row g-4 mb-5">
+      @for (i of idiomas; track i.nombre; let idx = $index) {
+        <div class="col-md-4">
+          <button type="button" class="lang-card" [class.active]="activo === idx" (click)="seleccionar(idx)">
+            <span class="flag">{{ i.icono }}</span>
+            <strong>{{ i.nombre }}</strong>
+            <small>{{ i.lema }}</small>
+          </button>
+        </div>
+      }
+    </div>
+
+    <div class="panel fade-in">
+      <div class="panel-head">
+        <h3>Programas de {{ idiomas[activo].nombre }}</h3>
+        <a class="btn-brand" [href]="idiomas[activo].enlace" target="_blank" rel="noopener">
+          Ver detalle <i class="bi bi-arrow-up-right"></i>
+        </a>
+      </div>
+      <div class="row g-3">
+        @for (p of idiomas[activo].programas; track p.nombre) {
+          <div class="col-md-6">
+            <div class="programa">
+              <i class="bi bi-check-circle-fill"></i>
+              <span>{{ p.nombre }}</span>
+              <span class="tag ms-auto">{{ p.modalidad }}</span>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

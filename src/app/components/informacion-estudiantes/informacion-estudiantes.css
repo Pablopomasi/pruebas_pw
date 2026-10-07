@@ -1,0 +1,29 @@
+.tab-body { background: var(--cic-soft); border-radius: 28px; padding: 36px; min-height: 280px; }
+.table { --bs-table-bg: transparent; }
+.table th { color: var(--cic-primary); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.6px; }
+
+.paso { background: #fff; border-radius: 18px; padding: 24px; height: 100%; }
+.n {
+  width: 38px; height: 38px;
+  display: inline-grid; place-items: center;
+  border-radius: 50%;
+  background: var(--cic-primary);
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.paso h4, .promo h4, .servicio h4 { font-size: 1rem; font-weight: 700; }
+.paso p, .promo p, .servicio p { color: var(--cic-muted); font-size: 0.87rem; margin: 0; }
+
+.requisitos { max-width: 640px; margin: 0 auto; }
+.requisitos li { display: flex; gap: 12px; padding: 14px 0; border-bottom: 1px dashed #cfdcf5; }
+.requisitos li:last-child { border-bottom: 0; }
+.requisitos i { color: var(--cic-primary); }
+
+.promo { background: #fff; border-radius: 18px; padding: 26px; height: 100%; border-top: 4px solid var(--cic-accent); }
+.promo h4 { margin: 12px 0 6px; }
+
+.servicio { display: flex; gap: 16px; align-items: flex-start; background: #fff; border-radius: 18px; padding: 20px; height: 100%; }
+.servicio .icon-circle { flex-shrink: 0; }
+
+@media (max-width: 767.98px) { .tab-body { padding: 22px; } }

@@ -1,0 +1,187 @@
+<section id="inicio" class="hero">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <span class="hero-badge"><i class="bi bi-stars me-2"></i>20 años conectándote con el mundo</span>
+        <h1>¡Llega cada vez <span>más lejos!</span></h1>
+        <p class="lead-text">
+          Aprende un segundo idioma con nosotros y accede a mejores oportunidades, descubre nuevas
+          realidades y vive experiencias alrededor del mundo.
+        </p>
+        <div class="d-flex flex-wrap gap-3">
+          <a class="btn-accent" href="#contacto">Solicita información <i class="bi bi-arrow-right"></i></a>
+          <a class="btn btn-outline-light rounded-pill px-4 py-2 fw-semibold" href="#oferta-academica">Ver idiomas</a>
+        </div>
+        <div class="chips">
+          <span class="chip">Hello 👋</span>
+          <span class="chip">Ciao 🇮🇹</span>
+          <span class="chip">Olá 🇧🇷</span>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="finder">
+          <h2><i class="bi bi-calendar2-week me-2"></i>Consulta horarios y modalidades</h2>
+          <p class="finder-sub">Filtra la oferta y encuentra el programa ideal para ti.</p>
+
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label for="f-idioma">Idioma</label>
+              <select id="f-idioma" class="form-select" [(ngModel)]="idioma">
+                <option value="">Todos</option>
+                @for (i of idiomas; track i) { <option [value]="i">{{ i }}</option> }
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="f-mod">Modalidad</label>
+              <select id="f-mod" class="form-select" [(ngModel)]="modalidad">
+                <option value="">Todas</option>
+                @for (m of modalidades; track m) { <option [value]="m">{{ m }}</option> }
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="f-nivel">Nivel</label>
+              <select id="f-nivel" class="form-select" [(ngModel)]="nivel">
+                <option value="">Todos</option>
+                @for (n of niveles; track n) { <option [value]="n">{{ n }}</option> }
+              </select>
+            </div>
+          </div>
+
+          <div class="results">
+            @for (r of resultados.slice(0, 4); track r.programa) {
+            <div class="result fade-in">
+              <div>
+                <strong>{{ r.programa }}</strong>
+                <small><i class="bi bi-clock me-1"></i>{{ r.horario }}</small>
+              </div>
+              <span class="tag">{{ r.modalidad }}</span>
+            </div>
+            } @empty {
+            <p class="empty">No hay programas con esos filtros.</p>
+            }
+          </div>
+
+          <div class="finder-foot">
+            <small>{{ resultados.length }} programa(s) · horarios referenciales</small>
+            <button type="button" class="link-btn" (click)="limpiar()">Limpiar filtros</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="container">
+    <div class="stats-box">
+      <div class="row g-4">
+        @for (s of stats; track s.texto) {
+        <div class="col-6 col-lg-3">
+          <div class="stat">
+            <i class="bi" [class]="s.icono"></i>
+            <h3>{{ s.valor }}</h3>
+            <p>{{ s.texto }}</p>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+<section class="expand-section">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Descubre tu programa</span>
+      <h2 class="section-title">Pasa el cursor y explora</h2>
+      <p class="section-sub">Elige el idioma o programa que más se adapte a tus metas.</p>
+    </div>
+
+    <div class="expand">
+      @for (p of paneles; track p.titulo; let i = $index) {
+      <article class="ex-panel" tabindex="0" [class.active]="panelActivo === i" [style.background]="p.fondo"
+        (mouseenter)="panelActivo = i" (focus)="panelActivo = i" (click)="panelActivo = i">
+        <span class="ex-label">{{ p.etiqueta }}</span>
+
+        <div class="ex-content">
+          <span class="ex-emoji">{{ p.emoji }}</span>
+          <span class="tag">{{ p.etiqueta }}</span>
+          <h3>{{ p.titulo }}</h3>
+          <p>{{ p.texto }}</p>
+          <ul>
+            @for (b of p.puntos; track b) {
+            <li><i class="bi bi-check-circle-fill"></i>{{ b }}</li>
+            }
+          </ul>
+          <a class="btn-accent" [href]="p.enlace" target="_blank" rel="noopener">
+            Ver programa <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+      </article>
+      }
+    </div>
+  </div>
+</section>
+<section id="nosotros" class="section">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-5">
+        <span class="eyebrow">Conócenos</span>
+        <h2 class="section-title">Un centro de idiomas con mirada global</h2>
+        <p class="section-sub mb-4">{{ descripcion }}</p>
+        <a class="btn-brand" href="https://idiomas.ucontinental.edu.pe/conocenos/" target="_blank" rel="noopener">
+          Conoce más <i class="bi bi-arrow-up-right"></i>
+        </a>
+      </div>
+      <div class="col-lg-7">
+        <div class="row g-4">
+          <div class="col-md-6">
+            <div class="card-cic">
+              <div class="icon-circle"><i class="bi bi-bullseye"></i></div>
+              <h3 class="h5 fw-bold">Misión</h3>
+              <p class="text-muted mb-0">{{ mision }}</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card-cic">
+              <div class="icon-circle"><i class="bi bi-binoculars"></i></div>
+              <h3 class="h5 fw-bold">Visión</h3>
+              <p class="text-muted mb-0">{{ vision }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trayectoria">
+      <h3 class="h4 fw-bold text-center mb-5">Nuestra trayectoria</h3>
+      <div class="row g-4">
+        @for (h of hitos; track h.etapa) {
+        <div class="col-md-6 col-lg-3">
+          <div class="hito">
+            <span class="dot"></span>
+            <small>{{ h.etapa }}</small>
+            <h4>{{ h.titulo }}</h4>
+            <p>{{ h.texto }}</p>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+
+    <div class="porque">
+      <h3 class="h4 fw-bold text-center mb-4">¿Por qué elegir el CIC?</h3>
+      <div class="row g-4">
+        @for (r of razones; track r.n) {
+        <div class="col-sm-6 col-lg-3">
+          <div class="razon">
+            <span class="num">{{ r.n }}</span>
+            <h4>{{ r.titulo }}</h4>
+            <p>{{ r.texto }}</p>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

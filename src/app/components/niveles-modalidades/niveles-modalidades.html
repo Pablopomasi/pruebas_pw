@@ -1,0 +1,46 @@
+<section id="niveles-modalidades" class="section">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Niveles y modalidades</span>
+      <h2 class="section-title">Encuentra tu nivel y tu forma de estudiar</h2>
+      <p class="section-sub">Niveles alineados al Marco Común Europeo de Referencia y modalidades que se adaptan a tu estilo de vida.</p>
+    </div>
+
+    <div class="stepper">
+      @for (n of niveles; track n.codigo; let i = $index) {
+        <button type="button" class="step" [class.active]="activo === i" [class.done]="i < activo" (click)="seleccionar(i)">
+          <span class="code">{{ n.codigo }}</span>
+          <small>{{ n.nombre }}</small>
+        </button>
+      }
+    </div>
+
+    <div class="nivel-detalle fade-in">
+      <div class="big-code">{{ niveles[activo].codigo }}</div>
+      <div>
+        <h3>{{ niveles[activo].nombre }}</h3>
+        <p>{{ niveles[activo].texto }}</p>
+        <ul>
+          @for (h of niveles[activo].habilidades; track h) {
+            <li><i class="bi bi-check2-circle"></i>{{ h }}</li>
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="row g-4 mt-4">
+      @for (m of modalidades; track m.titulo) {
+        <div class="col-sm-6 col-lg-3">
+          <div class="card-cic">
+            <div class="icon-circle"><i class="bi" [class]="m.icono"></i></div>
+            <h4 class="h5 fw-bold">{{ m.titulo }}</h4>
+            <p class="text-muted small">{{ m.texto }}</p>
+            <ul class="small">
+              @for (p of m.puntos; track p) { <li><i class="bi bi-dot"></i>{{ p }}</li> }
+            </ul>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
